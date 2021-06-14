@@ -21,13 +21,22 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 			<li class="nav-item">
-			<a class="nav-link" href="<?= URL ?>home/user">User Registration</a>
+			<a class="nav-link" href="<?= URL ?>home/user">Gebruiker Registeren</a>
 			</li>
 			<li class="nav-item">
-			<a class="nav-link" href="<?= URL ?>home/horse">Horse Registration</a>
+			<a class="nav-link" href="<?= URL ?>home/userList">Gebruikers Beheren</a>
 			</li>
 			<li class="nav-item">
-			<a class="nav-link" href="<?= URL ?>home/reservation">Place your Reservation</a>
+			<a class="nav-link" href="<?= URL ?>home/horse">Paard/Pony Registreren</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="<?= URL ?>home/horseList">Paard/Pony Beheren</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="<?= URL ?>home/reservation">Reservatie Plaatsen</a>
+			</li>
+			<li class="nav-item">
+			<a class="nav-link" href="<?= URL ?>home/reservationList">Reservaties Beheren</a>
 			</li>
 		</ul>
 		</div>
