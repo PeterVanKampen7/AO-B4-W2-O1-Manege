@@ -61,6 +61,11 @@ function horseList(){
 	render("home/horseList", getAllHorses());
 }
 
+function deleteHorse($id){
+	destroyHorse($id);
+	redirect("horseList");
+}
+
 function reservation(){
 	render("home/reservation");
 }

@@ -113,7 +113,7 @@
         try {
             $conn=openDatabaseConnection();
     
-            $stmt = $conn->prepare("INSERT INTO horse (`name`, breed, age, jump) VALUES (:name, :breed, :age, $jumpBool)");
+            $stmt = $conn->prepare("INSERT INTO horse (`name`, `type`, breed, age, jump) VALUES (:name, 'Paard', :breed, :age, $jumpBool)");
     
             $stmt->bindParam(":name", $data['name']);
             $stmt->bindParam(":breed", $data['breed']);
@@ -135,7 +135,7 @@
         try {
             $conn=openDatabaseConnection();
     
-            $stmt = $conn->prepare("INSERT INTO pony (`name`, breed, age, wither_height) VALUES (:name, :breed, :age, :height)");
+            $stmt = $conn->prepare("INSERT INTO horse (`name`, `type`, breed, age, wither_height) VALUES (:name, 'Pony', :breed, :age, :height)");
     
             $stmt->bindParam(":name", $data['name']);
             $stmt->bindParam(":breed", $data['breed']);
@@ -157,7 +157,7 @@
         try {
             $conn=openDatabaseConnection();
         
-            $stmt = $conn->prepare("SELECT * FROM horse");
+            $stmt = $conn->prepare("SELECT * FROM horse ORDER BY `type`");
 
             $stmt->execute();
 
@@ -169,10 +169,26 @@
         }
         $conn = null;
 
-        var_dump($result);
-        die();
-
         return $result;
+    }
+
+    function destroyHorse($id){
+        try {
+            $conn=openDatabaseConnection();
+    
+            $stmt = $conn->prepare("DELETE FROM horse WHERE id = :id");
+    
+            $stmt->bindParam(":id", $id);
+    
+            // Voer de query uit
+            $stmt->execute(); 
+        }
+        catch(PDOException $e){
+    
+            echo "Connection failed: " . $e->getMessage();
+        }
+    
+        $conn = null;
     }
 
     function trim_input($data) {
