@@ -95,7 +95,7 @@ function getRequestedPath(){
         if($_SERVER["PHP_SELF"] == "/"){
             return '';
         } else {
-            return $_SERVER['PHP_SELF'];
+            return '';
         }
         
     } else {
