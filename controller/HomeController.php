@@ -41,8 +41,24 @@ function horse(){
 	render("home/horse");
 }
 
+function storeHorse(){
+	//Maak een nieuwe bebruiker aan met de data uit het formulier en sla deze op in de database
+	$data = ["name" => trim_input($_POST['name']), "breed" => trim_input($_POST['breed']), "age" => trim_input($_POST["age"]), "jump" => trim_input($_POST["jump"])];
+    createHorse($data);
+    //Stuur de gebruiker naar index
+    redirect("horse");
+}
+
+function storePony(){
+	//Maak een nieuwe bebruiker aan met de data uit het formulier en sla deze op in de database
+	$data = ["name" => trim_input($_POST['name']), "breed" => trim_input($_POST['breed']), "age" => trim_input($_POST["age"]), "height" => trim_input($_POST["height"])];
+    createPony($data);
+    //Stuur de gebruiker naar index
+    redirect("horse");
+}
+
 function horseList(){
-	render("home/horseList");
+	render("home/horseList", getAllHorses());
 }
 
 function reservation(){
