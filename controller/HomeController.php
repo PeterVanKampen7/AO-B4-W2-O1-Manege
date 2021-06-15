@@ -66,6 +66,17 @@ function deleteHorse($id){
 	redirect("horseList");
 }
 
+function editHorse($id){
+	render("home/horseEdit", getHorse($id));
+}
+
+function horseEdit(){
+	$data = ["id" => $_POST['id'],"name" => trim_input($_POST['name']), "breed" => trim_input($_POST['breed']), "age" => trim_input($_POST["age"]), "jump" => trim_input($_POST["jump"]), "height" => trim_input($_POST["height"])];
+	changeHorse($data);
+
+	redirect("horseList");
+}
+
 function reservation(){
 	render("home/reservation");
 }

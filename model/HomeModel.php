@@ -172,6 +172,27 @@
         return $result;
     }
 
+    function getHorse($id){
+        try {
+            $conn=openDatabaseConnection();
+        
+            $stmt = $conn->prepare("SELECT * FROM horse WHERE id = :id");
+
+            $stmt->bindParam(":id", $id);
+
+            $stmt->execute();
+
+            $result = $stmt->fetch();
+    
+        }
+        catch(PDOException $e){
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+
+        return $result;
+    }
+
     function destroyHorse($id){
         try {
             $conn=openDatabaseConnection();
@@ -179,6 +200,43 @@
             $stmt = $conn->prepare("DELETE FROM horse WHERE id = :id");
     
             $stmt->bindParam(":id", $id);
+    
+            // Voer de query uit
+            $stmt->execute(); 
+        }
+        catch(PDOException $e){
+    
+            echo "Connection failed: " . $e->getMessage();
+        }
+    
+        $conn = null;
+    }
+
+    function changeHorse($data){
+        $jumpBool = 0;
+        if($data["jump"] == "Ja"){
+            $jumpBool = 1;
+        }
+
+        if($data['height'] == ""){
+            $data['height'] = NULL;
+        }
+        try {
+            $conn=openDatabaseConnection();
+    
+            $stmt = $conn->prepare("UPDATE horse
+                                    SET `name` = :name,
+                                        breed = :breed,
+                                        age = :age,
+                                        jump = $jumpBool,
+                                        wither_height = :height
+                                    WHERE id = :id");
+    
+            $stmt->bindParam(":id", $data['id']);
+            $stmt->bindParam(":name", $data['name']);
+            $stmt->bindParam(":breed", $data['breed']);
+            $stmt->bindParam(":age", $data['age']);
+            $stmt->bindParam(":height", $data['height']);
     
             // Voer de query uit
             $stmt->execute(); 
