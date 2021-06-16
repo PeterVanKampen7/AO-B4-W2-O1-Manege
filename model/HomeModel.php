@@ -249,6 +249,31 @@
         $conn = null;
     }
 
+    function createReservation($data){
+        try {
+            $conn=openDatabaseConnection();
+    
+            $stmt = $conn->prepare("INSERT INTO reservation (`user_id`, horse_id, `date`, start_time, duration, cost) 
+                                    VALUES (:user_id, :horse_id, :date, :start_time, :duration, :cost)");
+    
+            $stmt->bindParam(":user_id", $data['user']);
+            $stmt->bindParam(":horse_id", $data['horse']);
+            $stmt->bindParam(":date", $data['date']);
+            $stmt->bindParam(":start_time", $data['start_time']);
+            $stmt->bindParam(":duration", $data['duration']);
+            $stmt->bindParam(":cost", $data['cost']);
+    
+            // Voer de query uit
+            $stmt->execute(); 
+        }
+        catch(PDOException $e){
+    
+            echo "Connection failed: " . $e->getMessage();
+        }
+    
+        $conn = null;
+    }
+
     function trim_input($data) {
         $data = trim($data);
         $data = stripslashes($data);

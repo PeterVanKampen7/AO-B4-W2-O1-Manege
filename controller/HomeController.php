@@ -78,7 +78,21 @@ function horseEdit(){
 }
 
 function reservation(){
-	render("home/reservation");
+	$userData = getAllUsers();
+	$horseData = getAllHorses();
+	$data = ["userData" => $userData, "horseData" => $horseData];
+	render("home/reservation", $data);
+}
+
+function storeReservation(){
+	$cost = $_POST["duration"] * 55;
+	$data = ["user" => $_POST["user"], "horse" => $_POST["horse"], "date" => $_POST["date"], "start_time" => $_POST["start_time"], "duration" => $_POST["duration"], "cost" => $cost];
+	
+	createReservation($data);
+	
+	/*print_r($data);
+	die();*/
+	redirect("reservationList");
 }
 
 function reservationList(){
