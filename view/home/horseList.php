@@ -39,7 +39,7 @@
                             <h5 class="modal-title" id="exampleModalLabel">Bevestigen</h5>
                         </div>
                         <div class="modal-body">
-                            Weet u zeker dat u deze gebruiker wilt verwijderen?
+                            Weet u zeker dat u dit paard wilt verwijderen?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Nee</button>

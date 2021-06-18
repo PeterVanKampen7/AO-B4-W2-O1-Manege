@@ -90,13 +90,35 @@ function storeReservation(){
 	
 	createReservation($data);
 	
-	/*print_r($data);
-	die();*/
 	redirect("reservationList");
 }
 
 function reservationList(){
-	render("home/reservationList");
+	render("home/reservationList", getAllReservations());
+}
+
+function deleteReservation($id){
+	destroyReservation($id);
+	redirect("reservationList");
+}
+
+function editReservation($id){
+	$reservationData = getReservation($id);
+	$userData = getAllUsers();
+	$horseData = getAllHorses();
+	
+	$data = ["userData" => $userData, "horseData" => $horseData, "reservationData" => $reservationData];
+
+	render("home/reservationEdit", $data);
+}
+
+function reservationEdit(){
+	$cost = $_POST["duration"] * 55;
+	$data = ["id" => $_POST["id"], "user" => $_POST["user"], "horse" => $_POST["horse"], "date" => $_POST["date"], "start_time" => $_POST["start_time"], "duration" => $_POST["duration"], "cost" => $cost];
+	
+	changeReservation($data);
+	
+	redirect("reservationList");
 }
 
 function redirect($location){

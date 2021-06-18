@@ -274,6 +274,100 @@
         $conn = null;
     }
 
+    function getAllReservations(){
+        try {
+            $conn=openDatabaseConnection();
+        
+            $stmt = $conn->prepare("SELECT reservation.id, user.name, reservation.date, reservation.start_time, reservation.duration, reservation.cost, horse.type, horse.name AS horse_name, horse.breed
+                                    FROM user 
+                                    JOIN reservation ON user.id = user_id 
+                                    JOIN horse ON reservation.horse_id = horse.id");
+
+            $stmt->execute();
+
+            $result = $stmt->fetchAll();
+    
+        }
+        catch(PDOException $e){
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+
+        return $result;
+    }
+
+    function getReservation($id){
+        try {
+            $conn=openDatabaseConnection();
+        
+            $stmt = $conn->prepare("SELECT * FROM reservation WHERE id = :id");
+
+            $stmt->bindParam(":id", $id);
+
+            $stmt->execute();
+
+            $result = $stmt->fetch();
+    
+        }
+        catch(PDOException $e){
+            echo "Connection failed: " . $e->getMessage();
+        }
+        $conn = null;
+
+        return $result;
+    }
+
+    function destroyReservation($id){
+        try {
+            $conn=openDatabaseConnection();
+    
+            $stmt = $conn->prepare("DELETE FROM reservation WHERE id = :id");
+    
+            $stmt->bindParam(":id", $id);
+    
+            // Voer de query uit
+            $stmt->execute(); 
+        }
+        catch(PDOException $e){
+    
+            echo "Connection failed: " . $e->getMessage();
+        }
+    
+        $conn = null;
+    }
+
+    function changeReservation($data){
+        try {
+            $conn=openDatabaseConnection();
+    
+            $stmt = $conn->prepare("UPDATE reservation
+                                    SET user_id = :user,
+                                        horse_id = :horse,
+                                        `date` = :date,
+                                        start_time = :start_time,
+                                        duration = :duration,
+                                        cost = :cost
+                                    WHERE id = :id");
+    
+            $stmt->bindParam(":id", $data['id']);
+            $stmt->bindParam(":user", $data['user']);
+            $stmt->bindParam(":horse", $data['horse']);
+            $stmt->bindParam(":date", $data['date']);
+            $stmt->bindParam(":start_time", $data['start_time']);
+            $stmt->bindParam(":duration", $data['duration']);
+            $stmt->bindParam(":cost", $data['cost']);
+    
+            // Voer de query uit
+            $stmt->execute(); 
+        }
+        catch(PDOException $e){
+    
+            echo "Connection failed: " . $e->getMessage();
+        }
+    
+        $conn = null;
+    }
+
     function trim_input($data) {
         $data = trim($data);
         $data = stripslashes($data);
