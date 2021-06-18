@@ -96,6 +96,13 @@
     
             // Voer de query uit
             $stmt->execute(); 
+
+            $stmt = $conn->prepare("DELETE FROM reservation WHERE user_id = :id");
+    
+            $stmt->bindParam(":id", $id);
+    
+            // Voer de query uit
+            $stmt->execute();
         }
         catch(PDOException $e){
     
@@ -198,6 +205,13 @@
             $conn=openDatabaseConnection();
     
             $stmt = $conn->prepare("DELETE FROM horse WHERE id = :id");
+    
+            $stmt->bindParam(":id", $id);
+    
+            // Voer de query uit
+            $stmt->execute(); 
+
+            $stmt = $conn->prepare("DELETE FROM reservation WHERE horse_id = :id");
     
             $stmt->bindParam(":id", $id);
     
