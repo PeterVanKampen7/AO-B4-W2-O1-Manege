@@ -58,7 +58,7 @@
             <input type="text" readonly class="form-control" id="costField" value="<?php echo 55*$data["reservationData"]["duration"]?> euro">
         </div>
         <br>
-        <button class="btn btn-dark ml-3" type="submit">Reservering Plaatsen</button>
+        <button class="btn btn-dark ml-3" type="submit">Reservering Bewerken</button>
     </form>
     <script>
         function changeFunction(){
