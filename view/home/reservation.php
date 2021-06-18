@@ -31,18 +31,27 @@
         </div>
         <div class="form-group col-sm-8">
             <label for="duration">Hoeveel uur:</label>
-            <select class="form-control" name="duration">                              
+            <select class="form-control" name="duration" onchange="changeFunction()" id="timeInput">                              
                 <?php
-                    for ($i=1; $i <= 24; $i++) { 
+                    for ($i=1; $i <= 10; $i++) { 
                         echo '<option> '.$i." </option>";
                     }
                 ?>
             </select>
         </div>
         <div class="form-group col-sm-8">
-            <label">De kosten bedragen 55 euro per uur.</label>
+            <label for="cost">Totale Prijs:</label>
+            <input type="text" readonly class="form-control" value="55 euro" id="costField">
         </div>
         <br>
         <button class="btn btn-dark ml-3" type="submit">Reservering Plaatsen</button>
     </form>
+    <script>
+        function changeFunction(){
+            var time = document.getElementById("timeInput");
+            var cost = document.getElementById("costField");
+            var output = time.value * 55;
+            cost.value = output + " euro";
+        }
+    </script>
 </div>
